@@ -53,7 +53,7 @@ const apiKey = '96e6742ab01695f8b7efbf20116ccefc'
 const privateKey = '5decf7f546d7cdbea8c641bad4974e35dc650e8c'
 const hash = md5(ts + apiKey + privateKey)
 const limit = 100
-const url = `https://gateway.marvel.com/v1/public/comics?limit=${limit}&apikey=${apiKey}&dateRange=${dateRange}&formatType=comic&hasDigitalIssue=true`
+const url = `http://gateway.marvel.com/v1/public/comics?limit=${limit}&apikey=${apiKey}&dateRange=${dateRange}&formatType=comic&hasDigitalIssue=true`
 const config = {
 	ts,
 	apiKey,
