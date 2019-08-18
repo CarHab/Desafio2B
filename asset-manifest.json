@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Desafio2B/static/css/main.0c907582.chunk.css",
-    "main.js": "/Desafio2B/static/js/main.cb44cf1b.chunk.js",
-    "main.js.map": "/Desafio2B/static/js/main.cb44cf1b.chunk.js.map",
+    "main.js": "/Desafio2B/static/js/main.2c55fcd2.chunk.js",
+    "main.js.map": "/Desafio2B/static/js/main.2c55fcd2.chunk.js.map",
     "runtime~main.js": "/Desafio2B/static/js/runtime~main.68db1151.js",
     "runtime~main.js.map": "/Desafio2B/static/js/runtime~main.68db1151.js.map",
     "static/js/2.04be41d7.chunk.js": "/Desafio2B/static/js/2.04be41d7.chunk.js",
     "static/js/2.04be41d7.chunk.js.map": "/Desafio2B/static/js/2.04be41d7.chunk.js.map",
     "index.html": "/Desafio2B/index.html",
-    "precache-manifest.fd938bcda796eb54fe904551f98c0bbb.js": "/Desafio2B/precache-manifest.fd938bcda796eb54fe904551f98c0bbb.js",
+    "precache-manifest.6e0cdc42844dc6a15af4c27bbfa4ad83.js": "/Desafio2B/precache-manifest.6e0cdc42844dc6a15af4c27bbfa4ad83.js",
     "service-worker.js": "/Desafio2B/service-worker.js",
     "static/css/main.0c907582.chunk.css.map": "/Desafio2B/static/css/main.0c907582.chunk.css.map"
   }
