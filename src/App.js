@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		justifyContent: 'center',
-		marginTop: 50,
+		marginTop: 25,
 	},
 	pagesContainerBottom: {
 		display: 'flex',
@@ -52,8 +52,8 @@ const dateRange = '2000-01-01,2019-12-31'
 const apiKey = '96e6742ab01695f8b7efbf20116ccefc'
 const privateKey = '5decf7f546d7cdbea8c641bad4974e35dc650e8c'
 const hash = md5(ts + apiKey + privateKey)
-const limit = 10
-const url = `http://gateway.marvel.com/v1/public/comics?limit=${limit}&apikey=${apiKey}&dateRange=${dateRange}&formatType=comic&hasDigitalIssue=true`
+const limit = 100
+const url = `https://gateway.marvel.com/v1/public/comics?limit=${limit}&apikey=${apiKey}&dateRange=${dateRange}&formatType=comic&hasDigitalIssue=true`
 const config = {
 	ts,
 	apiKey,
@@ -79,7 +79,7 @@ const App = () => {
 		getComics()
 	}, [])
 
-	//Guardar string do campo de busca
+	//guardar string do campo de busca
 	const handleSearch = event => setQuery(event.target.value)
 
 	//filtrar quadrinhos baseado no input do usuario
@@ -105,12 +105,25 @@ const App = () => {
 				}
 			})
 		})
-
 		return currentComics
 	}
 
 	//função que é passada ao componente Paginate.js
 	const paginate = pageNumber => setCurrentPage(pageNumber)
+
+	//extrair escritores de cada quadrinho
+	const getWriters = creators => {
+		let writers = []
+		creators.forEach(creator => {
+			if (creator.role === 'writer') {
+				writers.push(writers.length >= 1 ? ' & ' + creator.name : creator.name)
+			}
+		})
+
+		//caso não exista nenhum escritor, retorna a primeira pessoa listada
+		if (writers.length === 0) writers.push(creators[0].name)
+		return writers
+	}
 
 	return (
 		<MuiThemeProvider theme={theme}>
@@ -133,18 +146,18 @@ const App = () => {
 							}}
 						/>
 					</div>
-					<div className={classes.pagesContainerBottom}>
-						<Pagination
-							className={classes.pageBtnsBottom}
-							comicsPerPage={comicsPerPage}
-							totalComics={limit}
-							paginate={paginate}
-						/>
-					</div>
+					{!query ? (
+						<div className={classes.pagesContainerTop}>
+							<Pagination
+								className={classes.pageBtnsTop}
+								comicsPerPage={comicsPerPage}
+								totalComics={limit}
+								paginate={paginate}
+							/>
+						</div>
+					) : null}
 				</div>
-			) : (
-				<div />
-			)}
+			) : null}
 			<Grid container className={classes.grid}>
 				{loading ? (
 					<CircularProgress style={{ marginTop: 50 }} />
@@ -155,7 +168,7 @@ const App = () => {
 							<Grid item xs={12} md={5} key={comic.id}>
 								<ComicCard
 									title={comic.title}
-									creator={comic.creators.items[0].name}
+									creator={getWriters(comic.creators.items)}
 									cover={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
 									description={comic.description}
 									series={comic.series.name}
@@ -170,7 +183,7 @@ const App = () => {
 					})
 				)}
 			</Grid>
-			{!loading ? (
+			{!loading && !query ? (
 				<div className={classes.pagesContainerBottom}>
 					<Pagination
 						className={classes.pageBtnsBottom}
@@ -179,10 +192,8 @@ const App = () => {
 						paginate={paginate}
 					/>
 				</div>
-			) : (
-				<div />
-			)}
-			{!loading ? <Footer /> : <div />}
+			) : null}
+			{!loading && !query? <Footer /> : null}
 		</MuiThemeProvider>
 	)
 }
