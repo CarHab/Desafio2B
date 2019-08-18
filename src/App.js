@@ -120,7 +120,7 @@ const App = () => {
 					<div className={classes.searchContainer}>
 						<TextField
 							id='search'
-							label='Buscar por personagem'
+							label='Filtrar por personagem'
 							className={classes.textField}
 							onChange={val => handleSearch(val)}
 							margin='normal'

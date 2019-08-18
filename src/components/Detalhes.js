@@ -5,11 +5,20 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles({
 	container: {
 		textAlign: 'center',
+	},
+	closeButton: {
+		position: 'absolute',
+		right: 20,
+		top: 10,
+		padding: 10,
+		boxSizing: 'border-box',
 	},
 	dados: {
 		display: 'flex',
@@ -33,14 +42,14 @@ const Detalhes = ({ open, handleClose, title, description, year, issue, series, 
 	const classes = useStyles()
 	return (
 		<div>
-			<Dialog
-				className={classes.container}
-				open={open}
-				onClose={handleClose}
-				aria-labelledby='alert-dialog-title'
-				aria-describedby='alert-dialog-description'>
-				<DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
-				<DialogContent className={classes.dados}>
+			<Dialog className={classes.container} open={open} onClose={handleClose}>
+				<DialogTitle>
+					{title}
+					<IconButton className={classes.closeButton} onClick={handleClose} edge='end'>
+						<CloseIcon />
+					</IconButton>
+				</DialogTitle>
+				<DialogContent className={classes.dados} dividers>
 					<DialogContentText className={classes.padding}>
 						<span className={classes.bold}>Criado por: </span>
 						{creator}
@@ -59,15 +68,10 @@ const Detalhes = ({ open, handleClose, title, description, year, issue, series, 
 					</DialogContentText>
 				</DialogContent>
 				<DialogContent>
-					<DialogContentText id='alert-dialog-description' className={classes.text}>
+					<DialogContentText className={classes.text}>
 						{description || 'Quadrinho sem descrição'}
 					</DialogContentText>
 				</DialogContent>
-				<DialogActions>
-					<Button onClick={handleClose} color='primary' variant='contained'>
-						Fechar
-					</Button>
-				</DialogActions>
 			</Dialog>
 		</div>
 	)
